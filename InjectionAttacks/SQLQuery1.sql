@@ -1,0 +1,1 @@
+﻿SELECT * FROM Users WHERE UserName='' GO use master go drop database secureDb go --' AND Password=''
