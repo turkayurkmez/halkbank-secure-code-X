@@ -2,7 +2,7 @@
 
 namespace AuthNAndAuthZ.Services
 {
-    public class UserService
+    public class UserService : IUserService
     {
         private List<User> _users = new List<User>()
         {
@@ -12,10 +12,20 @@ namespace AuthNAndAuthZ.Services
 
         };
 
+        public void CreateUser(RealUserViewModel userData)
+        {
+            throw new NotImplementedException();
+        }
+
         public User? ValidateUser(string userName, string passWord)
         {
             return _users.SingleOrDefault(u => u.UserName == userName && u.PasswordHash == passWord);
 
+        }
+
+        RealUser? IUserService.ValidateUser(string userName, string passWord)
+        {
+            throw new NotImplementedException();
         }
     }
 }

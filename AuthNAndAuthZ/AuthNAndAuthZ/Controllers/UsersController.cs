@@ -9,9 +9,9 @@ namespace AuthNAndAuthZ.Controllers
 {
     public class UsersController : Controller
     {
-        private readonly UserService userService;
+        private readonly IUserService userService;
 
-        public UsersController(UserService userService)
+        public UsersController(IUserService userService)
         {
             this.userService = userService;
         }
@@ -63,5 +63,17 @@ namespace AuthNAndAuthZ.Controllers
         }
 
         public IActionResult AccessDenied() => View();
+        public IActionResult RegisterUser() => View();
+        [HttpPost]
+        public IActionResult RegisterUser(RealUserViewModel realUser) 
+        {
+            if (ModelState.IsValid)
+            {
+                userService.CreateUser(realUser);
+                return Redirect("/");
+            }
+            return View();
+
+        }
     }
 }

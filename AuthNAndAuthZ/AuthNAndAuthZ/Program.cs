@@ -1,5 +1,7 @@
+using AuthNAndAuthZ.Data;
 using AuthNAndAuthZ.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.EntityFrameworkCore;
 
 namespace AuthNAndAuthZ
 {
@@ -19,7 +21,9 @@ namespace AuthNAndAuthZ
                                 options.AccessDeniedPath = "/Users/AccessDenied";
                             });
 
-            builder.Services.AddScoped<UserService>();
+            builder.Services.AddScoped<IUserService, RealUserService>();
+            var connectionString = builder.Configuration.GetConnectionString("db");
+            builder.Services.AddDbContext<SecureDbContext>(opt => opt.UseSqlServer(connectionString));
 
             var app = builder.Build();
 
