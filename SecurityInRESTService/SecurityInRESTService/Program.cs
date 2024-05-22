@@ -66,7 +66,9 @@ namespace SecurityInRESTService
             {
                 app.UseSwagger();
                 app.UseSwaggerUI();
+            
             }
+
 
 
             app.UseHttpsRedirection();
